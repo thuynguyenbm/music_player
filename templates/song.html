@@ -1,9 +1,17 @@
-<html>
-<head>
-    <title>Item Details</title>
-    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
-</head>
-<body>
-    <h1><a href="{{ url_for('read_item', id=id) }}">Item ID: {{ id }}</a></h1>
-</body>
-</html>
+{%extends "/home.html" %}
+{% block script %}
+	{{ super() }}
+    
+{% endblock %}
+
+{% block content %}
+{% if song %}
+<p>hahahah</p>
+<h1>{{song.title}}</h1>
+<h2>{{song.artist}} - {{song.album}}</h2>
+
+<div class="playButton"><img alt="{{url_for('static', path='play.jpg')}}" src="{{url_for('static', path='play.jpg')}}" width="30px"></div>
+<audio class="audioPlayer" controls hidden> {{song.content}}</audio>
+<script  type="text/javascript" src="{{ url_for('static', path='script.js')}}"></script>
+{% endif %}
+{% endblock %}

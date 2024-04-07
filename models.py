@@ -1,8 +1,7 @@
 from sqlalchemy import Column, Integer, String, Text
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 from pydantic import BaseModel
-
-Base = declarative_base()
+from database import Base
 
 class Song(Base):
     __tablename__ = "songs"
@@ -11,7 +10,8 @@ class Song(Base):
     title = Column(String(50), index=True)
     artist = Column(String(50), index=True)
     album = Column(String(50), index=True)
-    content = Column(Text, unique=True, index=True)
+    content = Column(Text, unique=False, index=True)
+
 
 class SongBase(BaseModel):
     title: str
@@ -19,7 +19,7 @@ class SongBase(BaseModel):
     album: str
     content: str
 
-class Song(SongBase):
+class SongDTO(SongBase):
     id: int
 
     class Config:
